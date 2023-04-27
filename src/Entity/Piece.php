@@ -24,14 +24,15 @@ class Piece
     private ?string $prix = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $etat = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $siteStockage = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?TypePiece $typePiece = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pieces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Etat $etat = null;
 
     public function getId(): ?int
     {
@@ -74,17 +75,6 @@ class Piece
         return $this;
     }
 
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(?string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     public function getSiteStockage(): ?string
     {
@@ -106,6 +96,18 @@ class Piece
     public function setTypePiece(?TypePiece $typePiece): self
     {
         $this->typePiece = $typePiece;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

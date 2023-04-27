@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DemandeNonConfirmeesController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    {{ user.nom }} voici ta liste de demandes non confirmées:
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>DateDemande</th>
+            <th>DateConfirmation</th>
+            <th>TypeEchange</th>
+            <th>FraisTransport</th>
+            <th>ModeTransport</th>
+            <th>NumSerieAeronef</th>
+            <th>ModeleAeronef</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for D in values %}
+            <tr>
+                <td>{{ D.id }}</td>
+                <td>{{ D.dateDemande ? D.dateDemande|date('Y-m-d') : '' }}</td>
+                <td>{{ D.dateConfirmation ? D.dateConfirmation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ D.typeEchange }}</td>
+                <td>{{ D.fraisTransport }}</td>
+                <td>{{ D.modeTransport }}</td>
+                <td>{{ D.numSerieAeronef }}</td>
+                <td>{{ D.modeleAeronef }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">No data found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a href="{{ path('app_conrfimer_les_demande') }}">
+            <button>Tous confirmer</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

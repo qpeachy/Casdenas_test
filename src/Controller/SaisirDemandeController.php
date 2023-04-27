@@ -28,10 +28,15 @@ class SaisirDemandeController extends AbstractController
 
             return $this->redirectToRoute('app_mes_demandes', [], Response::HTTP_SEE_OTHER);
         }
+        $message="";
+        if($user->isEstBloque()){
+            $message = "Vous avez été bloqué, vous ne pouvez pas créer de demande";
+        }
 
         return $this->render('saisir_demande/index.html.twig', [
             'demande' => $demande,
             'form' => $form,
+            'message'=>$message,
         ]);
     }
 }

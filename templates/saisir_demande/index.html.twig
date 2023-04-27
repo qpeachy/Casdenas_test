@@ -3,9 +3,13 @@
 {% block title %}New Demande{% endblock %}
 
 {% block body %}
+    {% if message != null %}
+    <div>{{ message }}</div>
+    {% else %}
     <h1>Create new Demande</h1>
 
     {{ include('demande/_form.html.twig') }}
 
     <a href="{{ path('app_mes_demandes') }}">back to list</a>
+    {% endif %}
 {% endblock %}
